@@ -3,11 +3,9 @@ package com.yoprogramo.portfoliobackend.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -23,7 +21,15 @@ public class Persona {
     private String ubicacion;
     private String acercaDe;
     private String email;
+    private String telefono;
     private String foto;
     private String banner;
-
+    @OneToMany(mappedBy = "persona")
+    private List<Educacion> educaciones;
+    @OneToMany(mappedBy = "persona")
+    private List<Experiencia> experiencias;
+    @OneToMany(mappedBy = "persona")
+    private List<Proyecto> proyectos;
+    @OneToMany(mappedBy = "persona")
+    private List<Tecnologia> tecnologias;
 }

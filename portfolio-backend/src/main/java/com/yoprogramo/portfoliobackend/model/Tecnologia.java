@@ -1,12 +1,10 @@
 package com.yoprogramo.portfoliobackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter @Setter
@@ -17,4 +15,7 @@ public class Tecnologia {
     private String nombre;
     private String descripcion;
     private String img;
+    @JsonIgnore
+    @ManyToOne
+    private Persona persona;
 }
