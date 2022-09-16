@@ -11,7 +11,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String usuario;
+    private String nombre;
     private String contrasenia;
     @OneToOne
     private Persona persona;
