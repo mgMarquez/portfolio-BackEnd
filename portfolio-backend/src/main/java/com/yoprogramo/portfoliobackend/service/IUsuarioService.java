@@ -1,7 +1,6 @@
 package com.yoprogramo.portfoliobackend.service;
 
 import com.yoprogramo.portfoliobackend.model.Usuario;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
