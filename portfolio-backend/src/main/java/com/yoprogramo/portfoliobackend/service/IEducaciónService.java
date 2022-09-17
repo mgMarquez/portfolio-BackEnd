@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface IEducaciónService {
     List<Educacion> findAllEducacion();
-    void saveEducacion(Educacion educacion);
     Educacion findEducacionById(Long id);
+    void saveEducacion(Educacion educacion);
     void deleteEducacion(Long id);
+    void updateEducación(Long id, Educacion educacion);
 }

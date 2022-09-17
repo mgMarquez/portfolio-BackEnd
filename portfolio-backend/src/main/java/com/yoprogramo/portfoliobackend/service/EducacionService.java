@@ -33,4 +33,17 @@ public class EducacionService implements IEducaciónService {
         Educacion educacion = findEducacionById(id);
         repo.delete(educacion);
     }
+
+    @Override
+    public void updateEducación(Long id, Educacion educacion) {
+        Educacion updateEducacion = findEducacionById(id);
+        updateEducacion.setTitulo(educacion.getTitulo());
+        updateEducacion.setEscuela(educacion.getEscuela());
+        updateEducacion.setDescripcion(educacion.getEscuela());
+        updateEducacion.setImg(educacion.getImg());
+        updateEducacion.setInicio(educacion.getInicio());
+        updateEducacion.setFin(educacion.getFin());
+
+        saveEducacion(updateEducacion);
+    }
 }
