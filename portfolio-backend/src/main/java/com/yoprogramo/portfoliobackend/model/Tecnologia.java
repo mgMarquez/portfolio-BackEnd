@@ -15,7 +15,6 @@ public class Tecnologia {
     private String nombre;
     private String descripcion;
     private String img;
-    @JsonIgnore
     @ManyToOne
     private Persona persona;
 }

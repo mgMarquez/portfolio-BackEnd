@@ -20,7 +20,6 @@ public class Educacion {
     private String url;
     private LocalDate inicio;
     private LocalDate fin;
-    @JsonIgnore
     @ManyToOne
     private Persona persona;
 }

@@ -16,7 +16,6 @@ public class Proyecto {
     private String descripcion;
     private String img;
     private String url;
-    @JsonIgnore
     @ManyToOne
     private Persona persona;
 }

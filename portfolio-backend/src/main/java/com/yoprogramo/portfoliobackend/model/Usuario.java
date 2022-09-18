@@ -13,7 +13,7 @@ public class Usuario {
     private Long id;
     private String nombre;
     private String contrasenia;
-    @OneToOne
-    private Persona persona;
+    // @OneToOne
+    // private Persona persona;
 
 }

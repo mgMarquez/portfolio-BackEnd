@@ -20,7 +20,6 @@ public class Experiencia {
     private String url;
     private LocalDate inicio;
     private LocalDate Fin;
-    @JsonIgnore
     @ManyToOne
     private Persona persona;
 }

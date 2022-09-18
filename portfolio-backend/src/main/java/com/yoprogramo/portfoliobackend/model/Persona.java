@@ -24,12 +24,15 @@ public class Persona {
     private String telefono;
     private String foto;
     private String banner;
-    @OneToMany(mappedBy = "persona")
-    private List<Educacion> educaciones;
-    @OneToMany(mappedBy = "persona")
-    private List<Experiencia> experiencias;
-    @OneToMany(mappedBy = "persona")
-    private List<Proyecto> proyectos;
-    @OneToMany(mappedBy = "persona")
-    private List<Tecnologia> tecnologias;
+    
+    @OneToOne    
+    private Usuario usuario;
+    // @OneToMany(mappedBy = "persona")
+    // private List<Educacion> educaciones;
+    // @OneToMany(mappedBy = "persona")
+    // private List<Experiencia> experiencias;
+    // @OneToMany(mappedBy = "persona")
+    // private List<Proyecto> proyectos;
+    // @OneToMany(mappedBy = "persona")
+    // private List<Tecnologia> tecnologias;
 }
