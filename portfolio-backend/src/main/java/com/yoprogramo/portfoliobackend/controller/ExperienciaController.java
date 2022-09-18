@@ -34,4 +34,9 @@ public class ExperienciaController {
     public void modifyExperiencia(@PathVariable Long id, @RequestBody Experiencia experiencia) {
         service.updateExperiencia(id, experiencia);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteExperiencia(@PathVariable Long id) {
+        service.deleteExperiencia(id);
+    }
 }

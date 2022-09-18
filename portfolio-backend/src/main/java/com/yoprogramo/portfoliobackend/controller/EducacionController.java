@@ -34,4 +34,8 @@ public class EducacionController {
         service.updateEducación(id, educacion);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteEducacion(@PathVariable Long id) {
+        service.deleteEducacion(id);
+    }
 }

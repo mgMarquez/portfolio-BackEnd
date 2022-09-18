@@ -32,4 +32,9 @@ public class ProyectoController {
     public void modifyProyecto(@PathVariable Long id, @RequestBody Proyecto proyecto) {
         service.updateProyecto(id, proyecto);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteProyecto(@PathVariable Long id) {
+        service.deleteProyecto(id);
+    }
 }

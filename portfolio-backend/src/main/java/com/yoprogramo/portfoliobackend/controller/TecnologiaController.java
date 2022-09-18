@@ -32,4 +32,9 @@ public class TecnologiaController {
     public void modifyTecnologia(@PathVariable Long id, @RequestBody Tecnologia tecnologia) {
         service.updateTecnologia(id, tecnologia);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteTecnologia(@PathVariable Long id) {
+        service.deleteTecnologia(id);
+    }
 }
