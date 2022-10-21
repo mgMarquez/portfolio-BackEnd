@@ -40,7 +40,7 @@ public class EducacionService implements IEducacionService {
         updateEducacion.setTitulo(educacion.getTitulo());
         updateEducacion.setEscuela(educacion.getEscuela());
         updateEducacion.setDescripcion(educacion.getEscuela());
-        updateEducacion.setImg(educacion.getImg());
+        updateEducacion.setImgUrl(educacion.getImgUrl());
         updateEducacion.setInicio(educacion.getInicio());
         updateEducacion.setFin(educacion.getFin());
 
