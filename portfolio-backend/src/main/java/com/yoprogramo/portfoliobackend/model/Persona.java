@@ -31,8 +31,6 @@ public class Persona {
     private String fotoUrl;
     private String bannerUrl;
 
-    @OneToOne(fetch = FetchType.EAGER, optional = false)
-    private Usuario usuario;
     @JsonManagedReference
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Educacion> educaciones = new ArrayList<>();

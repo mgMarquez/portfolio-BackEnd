@@ -13,7 +13,7 @@ public class UsuarioController {
     @Autowired
     private IUsuarioService service;
 
-    @GetMapping("/")
+    @GetMapping
     public List<UsuarioDTO> getAllUsuarios() {
         return service.findAllUsuarios();
     }
@@ -23,9 +23,9 @@ public class UsuarioController {
         return service.findUsuarioById(id);
     }
 
-    @PostMapping("/")
-    public UsuarioDTO addUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-        return service.saveUsuario(usuarioDTO);
+    @PostMapping("/personas/{persona_id}")
+    public UsuarioDTO addUsuario(@RequestBody UsuarioDTO usuarioDTO, @PathVariable Long persona_id) {
+        return service.saveUsuario(usuarioDTO, persona_id);
     }
 
     @PutMapping("/{id}")

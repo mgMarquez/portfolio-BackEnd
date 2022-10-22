@@ -18,4 +18,7 @@ public class Usuario {
     private String email;
     @Column(nullable = false)
     private String contrasenia;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
+    private Persona persona;
 }

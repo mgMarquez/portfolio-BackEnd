@@ -2,7 +2,9 @@ package com.yoprogramo.portfoliobackend.service;
 
 import com.yoprogramo.portfoliobackend.dto.EducacionDTO;
 import com.yoprogramo.portfoliobackend.model.Educacion;
+import com.yoprogramo.portfoliobackend.model.Persona;
 import com.yoprogramo.portfoliobackend.repository.IEduacionRepository;
+import com.yoprogramo.portfoliobackend.repository.IPersonaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import java.util.List;
 public class EducacionService implements IEducacionService {
     @Autowired
     private IEduacionRepository repo;
+    @Autowired
+    private IPersonaRepository personaRepo;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -25,16 +29,22 @@ public class EducacionService implements IEducacionService {
     }
 
     @Override
-    public EducacionDTO saveEducacion(EducacionDTO educacionDTO) {
+    public EducacionDTO saveEducacion(EducacionDTO educacionDTO, Long personaId) {
+        Persona persona = personaRepo.findById(personaId).orElse(null);
         Educacion educacion = mapearEntidad(educacionDTO);
+        educacion.setPersona(persona);
         Educacion educacionActualizada = repo.save(educacion);
         return mapearDTO(educacionActualizada);
     }
 
     @Override
-    public EducacionDTO findEducacionById(Long id) {
+    public EducacionDTO findEducacionById(Long id, Long personaId) {
+        Persona persona = personaRepo.findById(personaId).orElse(null);
         Educacion educacion = repo.findById(id)
                 .orElse(null);
+        if(educacion.getPersona().getId() != persona.getId()) {
+            // exception
+        }
         return mapearDTO(educacion);
     }
 

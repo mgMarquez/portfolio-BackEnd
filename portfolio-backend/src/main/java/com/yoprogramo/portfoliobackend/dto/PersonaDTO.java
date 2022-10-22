@@ -9,6 +9,7 @@ import java.util.List;
 
 @Getter @Setter
 public class PersonaDTO {
+    private Long id;
     private String nombre;
     private String apellido;
     private LocalDate fechaNac;
@@ -20,6 +21,5 @@ public class PersonaDTO {
     private String telefono;
     private String fotoUrl;
     private String bannerUrl;
-    private Long usuario_id;
     private List<EducacionDTO> educaciones = new ArrayList<>();
 }

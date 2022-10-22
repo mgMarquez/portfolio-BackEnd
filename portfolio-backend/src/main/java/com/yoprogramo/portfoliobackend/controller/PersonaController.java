@@ -13,10 +13,8 @@ import java.util.List;
 public class PersonaController {
     @Autowired
     private IPersonaService service;
-    @Autowired
-    private IUsuarioService serviceUsuario;
 
-    @GetMapping("/")
+    @GetMapping
     public List<PersonaDTO> getAllPersonas() {
         return service.findAllPersonas();
     }
@@ -26,7 +24,7 @@ public class PersonaController {
         return service.findPersonaById(id);
     }
 
-    @PostMapping("/")
+    @PostMapping()
     public PersonaDTO addPersona(@RequestBody PersonaDTO personaDTO) {
         return service.savePersona(personaDTO);
     }

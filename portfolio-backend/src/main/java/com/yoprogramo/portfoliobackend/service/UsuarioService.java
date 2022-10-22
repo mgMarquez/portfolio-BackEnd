@@ -1,7 +1,9 @@
 package com.yoprogramo.portfoliobackend.service;
 
 import com.yoprogramo.portfoliobackend.dto.UsuarioDTO;
+import com.yoprogramo.portfoliobackend.model.Persona;
 import com.yoprogramo.portfoliobackend.model.Usuario;
+import com.yoprogramo.portfoliobackend.repository.IPersonaRepository;
 import com.yoprogramo.portfoliobackend.repository.IUsuarioRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import java.util.List;
 public class UsuarioService implements IUsuarioService{
     @Autowired
     private IUsuarioRepository repo;
+    @Autowired
+    private IPersonaRepository personaRepo;
     @Autowired
     private ModelMapper modelMapper;
     @Override
@@ -32,8 +36,10 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public UsuarioDTO saveUsuario(UsuarioDTO usuarioDTO) {
+    public UsuarioDTO saveUsuario(UsuarioDTO usuarioDTO, Long personaId) {
+        Persona persona = personaRepo.findById(personaId).orElse(null);
         Usuario usuario = mapearEntidad(usuarioDTO);
+        usuario.setPersona(persona);
         Usuario nuevoUsuario = repo.save(usuario);
         return mapearDTO(nuevoUsuario);
     }
