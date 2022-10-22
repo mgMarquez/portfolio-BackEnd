@@ -50,12 +50,14 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public UsuarioDTO updateUsuario(Long id, UsuarioDTO usuarioDTO) {
+    public UsuarioDTO updateUsuario(Long id, UsuarioDTO usuarioDTO, Long personaId) {
         Usuario usuario = repo.findById(id).orElse(null);
+        Persona persona = personaRepo.findById(personaId).orElse(null);
 
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setContrasenia(usuarioDTO.getContrasenia());
         usuario.setEmail(usuarioDTO.getEmail());
+        usuario.setPersona(persona);
 
         Usuario usuarioActualizado = repo.save(usuario);
         return mapearDTO(usuarioActualizado);

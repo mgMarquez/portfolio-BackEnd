@@ -8,6 +8,6 @@ public interface IUsuarioService {
     List<UsuarioDTO> findAllUsuarios();
     UsuarioDTO findUsuarioById(Long id);
     UsuarioDTO saveUsuario(UsuarioDTO usuarioDTO, Long personaId);
-    UsuarioDTO updateUsuario(Long id, UsuarioDTO usuarioDTO);
+    UsuarioDTO updateUsuario(Long id, UsuarioDTO usuarioDTO, Long personaId);
     void deleteUsuario(Long id);
 }

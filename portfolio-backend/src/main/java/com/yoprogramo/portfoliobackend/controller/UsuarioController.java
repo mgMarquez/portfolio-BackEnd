@@ -28,9 +28,9 @@ public class UsuarioController {
         return service.saveUsuario(usuarioDTO, persona_id);
     }
 
-    @PutMapping("/{id}")
-    public UsuarioDTO modifyUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
-        return service.updateUsuario(id, usuarioDTO);
+    @PutMapping("/{id}/personas/{persona_id}")
+    public UsuarioDTO modifyUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO, @PathVariable Long persona_id) {
+        return service.updateUsuario(id, usuarioDTO, persona_id);
     }
 
     @DeleteMapping("/{id}")
