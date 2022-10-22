@@ -40,8 +40,8 @@ public class ExperienciaService implements IExperienciaService{
         updateExperiencia.setPosicion(experiencia.getPosicion());
         updateExperiencia.setCompania(experiencia.getCompania());
         updateExperiencia.setDescripcion(experiencia.getDescripcion());
-        updateExperiencia.setImg(experiencia.getImg());
-        updateExperiencia.setUrl(experiencia.getUrl());
+        updateExperiencia.setImgUrl(experiencia.getImgUrl());
+        updateExperiencia.setWebUrl(experiencia.getWebUrl());
         updateExperiencia.setInicio(experiencia.getInicio());
         updateExperiencia.setFin(experiencia.getFin());
 

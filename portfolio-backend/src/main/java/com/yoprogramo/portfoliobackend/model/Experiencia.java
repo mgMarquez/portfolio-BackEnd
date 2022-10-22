@@ -1,25 +1,33 @@
 package com.yoprogramo.portfoliobackend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Getter @Setter
+@Table(name = "experiencias")
 public class Experiencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String posicion;
+    @Column(nullable = false)
     private String compania;
+    @Column(nullable = false)
     private String descripcion;
-    private String img;
-    private String url;
-    private LocalDate inicio;
-    private LocalDate Fin;
-    @ManyToOne
+    private String imgUrl;
+    private String webUrl;
+    @Column(nullable = false)
+    private String inicio;
+    @Column(nullable = false)
+    private String Fin;
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "persona_id", nullable = false)
     private Persona persona;
 }
