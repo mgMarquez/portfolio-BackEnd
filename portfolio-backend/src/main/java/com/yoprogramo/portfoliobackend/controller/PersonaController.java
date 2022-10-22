@@ -19,7 +19,7 @@ public class PersonaController {
     private IUsuarioService serviceUsuario;
 
     @GetMapping("/")
-    public List<Persona> getAllPersonas() {
+    public List<PersonaDTO> getAllPersonas() {
         return service.findAllPersonas();
     }
 

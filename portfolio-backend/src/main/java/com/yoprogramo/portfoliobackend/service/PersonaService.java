@@ -1,7 +1,9 @@
 package com.yoprogramo.portfoliobackend.service;
 
+import com.yoprogramo.portfoliobackend.dto.PersonaDTO;
 import com.yoprogramo.portfoliobackend.model.Persona;
 import com.yoprogramo.portfoliobackend.repository.IPersonaRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +13,16 @@ import java.util.List;
 public class PersonaService implements IPersonaService{
     @Autowired
     private IPersonaRepository repo;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
-    public List<Persona> findAllPersonas() {
-        return repo.findAll();
+    public List<PersonaDTO> findAllPersonas() {
+        List<Persona> personas = repo.findAll();
+        return personas
+                .stream()
+                .map(this::mapearDTO)
+                .toList();
     }
 
     @Override
@@ -49,5 +57,8 @@ public class PersonaService implements IPersonaService{
         updatePersona.setBannerUrl(persona.getBannerUrl());
 
         repo.save(updatePersona);
+    }
+    private PersonaDTO mapearDTO(Persona persona) {
+        return modelMapper.map(persona, PersonaDTO.class);
     }
 }
