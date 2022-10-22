@@ -25,8 +25,10 @@ public class EducacionService implements IEducacionService {
     }
 
     @Override
-    public void saveEducacion(Educacion educacion) {
-        repo.save(educacion);
+    public EducacionDTO saveEducacion(EducacionDTO educacionDTO) {
+        Educacion educacion = mapearEntidad(educacionDTO);
+        Educacion educacionActualizada = repo.save(educacion);
+        return mapearDTO(educacionActualizada);
     }
 
     @Override
@@ -54,10 +56,14 @@ public class EducacionService implements IEducacionService {
         updateEducacion.setInicio(educacion.getInicio());
         updateEducacion.setFin(educacion.getFin());
 
-        saveEducacion(updateEducacion);
+        //saveEducacion(updateEducacion);
     }
 
     private EducacionDTO mapearDTO(Educacion educacion) {
         return modelMapper.map(educacion, EducacionDTO.class);
+    }
+
+    private Educacion mapearEntidad(EducacionDTO educacionDTO) {
+        return modelMapper.map(educacionDTO, Educacion.class);
     }
 }

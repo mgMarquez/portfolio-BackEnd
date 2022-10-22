@@ -26,8 +26,8 @@ public class EducacionController {
     }
 
     @PostMapping("/")
-    public void addEducacion(@RequestBody Educacion educacion) {
-        service.saveEducacion(educacion);
+    public EducacionDTO addEducacion(@RequestBody EducacionDTO educacionDTO) {
+        return service.saveEducacion(educacionDTO);
     }
 
     @PutMapping("/{id}")
