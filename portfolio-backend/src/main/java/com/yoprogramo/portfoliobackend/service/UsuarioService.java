@@ -25,9 +25,10 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public Usuario findUsuarioById(Long id) {
-        return repo.findById(id)
+    public UsuarioDTO findUsuarioById(Long id) {
+        Usuario usuario = repo.findById(id)
                 .orElse(null);
+        return mapearDTO(usuario);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public void updateUsuario(Long id, Usuario usuario) {
-        Usuario updateUsuario = findUsuarioById(id);
+        Usuario updateUsuario = repo.findById(id).orElse(null);
         updateUsuario.setNombre(usuario.getNombre());
         updateUsuario.setContrasenia(usuario.getContrasenia());
     }

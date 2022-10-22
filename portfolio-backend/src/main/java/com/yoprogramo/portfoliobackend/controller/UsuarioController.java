@@ -20,7 +20,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public Usuario getUsuarioById(@PathVariable Long id) {
+    public UsuarioDTO getUsuarioById(@PathVariable Long id) {
         return service.findUsuarioById(id);
     }
 

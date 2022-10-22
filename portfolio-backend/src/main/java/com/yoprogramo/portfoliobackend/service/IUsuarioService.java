@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IUsuarioService {
     List<UsuarioDTO> findAllUsuarios();
-    Usuario findUsuarioById(Long id);
+    UsuarioDTO findUsuarioById(Long id);
     void saveUsuario(Usuario usuario);
     void deleteUsuario(Long id);
     void updateUsuario(Long id, Usuario usuario);
