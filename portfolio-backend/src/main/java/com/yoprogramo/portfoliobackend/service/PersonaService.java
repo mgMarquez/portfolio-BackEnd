@@ -34,8 +34,10 @@ public class PersonaService implements IPersonaService{
     }
 
     @Override
-    public void savePersona(Persona persona) {
-        repo.save(persona);
+    public PersonaDTO savePersona(PersonaDTO personaDTO) {
+        Persona persona = mapearEntidad(personaDTO);
+        Persona nuevaPersona = repo.save(persona);
+        return mapearDTO(nuevaPersona);
     }
 
     @Override
@@ -64,5 +66,9 @@ public class PersonaService implements IPersonaService{
     }
     private PersonaDTO mapearDTO(Persona persona) {
         return modelMapper.map(persona, PersonaDTO.class);
+    }
+
+    private Persona mapearEntidad(PersonaDTO personaDTO) {
+        return modelMapper.map(personaDTO, Persona.class);
     }
 }

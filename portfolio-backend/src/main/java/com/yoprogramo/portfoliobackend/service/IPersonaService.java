@@ -8,7 +8,7 @@ import java.util.List;
 public interface IPersonaService {
     List<PersonaDTO> findAllPersonas();
     PersonaDTO findPersonaById(Long id);
-    void savePersona(Persona persona);
+    PersonaDTO savePersona(PersonaDTO personaDTO);
     void deletePersona(Long id);
     void updatePersona(Long id, Persona persona);
 }

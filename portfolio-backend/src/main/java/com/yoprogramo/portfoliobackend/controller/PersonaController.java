@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/persona")
+@RequestMapping("api/personas")
 public class PersonaController {
     @Autowired
     private IPersonaService service;
@@ -28,25 +28,9 @@ public class PersonaController {
         return service.findPersonaById(id);
     }
 
-    @PostMapping("/new")
-    public void addPersona(@RequestBody PersonaDTO personaDto) {
-        Usuario usuario = serviceUsuario.findUsuarioById(personaDto.getUsuario_id());
-        Persona nuevaPersona = new Persona();
-        //PersonaDto a Persona
-        nuevaPersona.setNombre(personaDto.getNombre());
-        nuevaPersona.setApellido(personaDto.getApellido());
-        nuevaPersona.setFechaNac(personaDto.getFechaNac());
-        nuevaPersona.setNacionalidad(personaDto.getNacionalidad());
-        nuevaPersona.setUbicacion(personaDto.getUbicacion());
-        nuevaPersona.setProfesion(personaDto.getProfesion());
-        nuevaPersona.setAcercaDe(personaDto.getAcercaDe());
-        nuevaPersona.setTelefono(personaDto.getTelefono());
-        nuevaPersona.setEmail(personaDto.getEmail());
-        nuevaPersona.setFotoUrl(personaDto.getFotoUrl());
-        nuevaPersona.setBannerUrl(personaDto.getBannerUrl());
-        nuevaPersona.setUsuario(usuario);
-
-        service.savePersona(nuevaPersona);
+    @PostMapping("/")
+    public PersonaDTO addPersona(@RequestBody PersonaDTO personaDTO) {
+        return service.savePersona(personaDTO);
     }
 
     @PutMapping("/{id}")
