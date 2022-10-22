@@ -1,7 +1,6 @@
 package com.yoprogramo.portfoliobackend.controller;
 
 import com.yoprogramo.portfoliobackend.dto.UsuarioDTO;
-import com.yoprogramo.portfoliobackend.model.Usuario;
 import com.yoprogramo.portfoliobackend.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +29,8 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public void modifyUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
-        service.updateUsuario(id, usuario);
+    public UsuarioDTO modifyUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+        return service.updateUsuario(id, usuarioDTO);
     }
 
     @DeleteMapping("/{id}")

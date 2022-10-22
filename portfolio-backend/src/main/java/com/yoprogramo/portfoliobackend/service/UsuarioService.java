@@ -44,10 +44,15 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public void updateUsuario(Long id, Usuario usuario) {
-        Usuario updateUsuario = repo.findById(id).orElse(null);
-        updateUsuario.setNombre(usuario.getNombre());
-        updateUsuario.setContrasenia(usuario.getContrasenia());
+    public UsuarioDTO updateUsuario(Long id, UsuarioDTO usuarioDTO) {
+        Usuario usuario = repo.findById(id).orElse(null);
+
+        usuario.setNombre(usuarioDTO.getNombre());
+        usuario.setContrasenia(usuarioDTO.getContrasenia());
+        usuario.setEmail(usuarioDTO.getEmail());
+
+        Usuario usuarioActualizado = repo.save(usuario);
+        return mapearDTO(usuarioActualizado);
     }
 
     private UsuarioDTO mapearDTO(Usuario usuario) {
