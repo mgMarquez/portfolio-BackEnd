@@ -26,9 +26,11 @@ public class PersonaService implements IPersonaService{
     }
 
     @Override
-    public Persona findPersonaById(Long id) {
-        return repo.findById(id)
+    public PersonaDTO findPersonaById(Long id) {
+        Persona persona = repo
+                .findById(id)
                 .orElse(null);
+        return mapearDTO(persona);
     }
 
     @Override
@@ -43,7 +45,9 @@ public class PersonaService implements IPersonaService{
 
     @Override
     public void updatePersona(Long id, Persona persona) {
-        Persona updatePersona = findPersonaById(id);
+        Persona updatePersona = repo
+                .findById(id)
+                .orElse(null);
         updatePersona.setNombre(persona.getNombre());
         updatePersona.setApellido(persona.getApellido());
         updatePersona.setFechaNac(persona.getFechaNac());

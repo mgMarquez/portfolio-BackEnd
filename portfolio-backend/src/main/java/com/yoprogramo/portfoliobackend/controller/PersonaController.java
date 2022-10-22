@@ -24,7 +24,7 @@ public class PersonaController {
     }
 
     @GetMapping("/{id}")
-    public Persona getPersonaById(@PathVariable Long id) {
+    public PersonaDTO getPersonaById(@PathVariable Long id) {
         return service.findPersonaById(id);
     }
 
