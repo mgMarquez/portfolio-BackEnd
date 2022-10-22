@@ -2,6 +2,8 @@ package com.yoprogramo.portfoliobackend.service;
 
 import java.util.List;
 
+import com.yoprogramo.portfoliobackend.dto.ExperienciaDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +14,16 @@ import com.yoprogramo.portfoliobackend.repository.IExperienciaRepository;
 public class ExperienciaService implements IExperienciaService{
     @Autowired
     private IExperienciaRepository repo;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
-    public List<Experiencia> findAllExperiencias() {
-        return repo.findAll();
+    public List<ExperienciaDTO> findAllExperiencias() {
+        List<Experiencia> experiencias = repo.findAll();
+        return experiencias
+                .stream()
+                .map(this::mapearDTO)
+                .toList();
     }
 
     @Override
@@ -47,5 +55,8 @@ public class ExperienciaService implements IExperienciaService{
 
         saveExperiencia(updateExperiencia);
     }
-    
+
+    private ExperienciaDTO mapearDTO(Experiencia experiencia) {
+        return modelMapper.map(experiencia, ExperienciaDTO.class);
+    }
 }

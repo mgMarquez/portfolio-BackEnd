@@ -1,5 +1,6 @@
 package com.yoprogramo.portfoliobackend.controller;
 
+import com.yoprogramo.portfoliobackend.dto.ExperienciaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class ExperienciaController {
     private IExperienciaService service;
 
     @GetMapping("/")
-    public List<Experiencia> getAllExperiencias() {
+    public List<ExperienciaDTO> getAllExperiencias() {
         return service.findAllExperiencias();
     }
 
