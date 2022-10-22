@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/usuario")
+@RequestMapping("api/usuarios")
 public class UsuarioController {
     @Autowired
     private IUsuarioService service;
@@ -23,7 +23,7 @@ public class UsuarioController {
         return service.findUsuarioById(id);
     }
 
-    @PostMapping("/new")
+    @PostMapping("/")
     public UsuarioDTO addUsuario(@RequestBody UsuarioDTO usuarioDTO) {
         return service.saveUsuario(usuarioDTO);
     }
