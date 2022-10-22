@@ -30,20 +30,23 @@ public class EducacionService implements IEducacionService {
     }
 
     @Override
-    public Educacion findEducacionById(Long id) {
-        return repo.findById(id)
+    public EducacionDTO findEducacionById(Long id) {
+        Educacion educacion = repo.findById(id)
                 .orElse(null);
+        return mapearDTO(educacion);
     }
 
     @Override
     public void deleteEducacion(Long id) {
-        Educacion educacion = findEducacionById(id);
+        Educacion educacion = repo.findById(id)
+                .orElse(null);
         repo.delete(educacion);
     }
 
     @Override
     public void updateEducación(Long id, Educacion educacion) {
-        Educacion updateEducacion = findEducacionById(id);
+        Educacion updateEducacion = repo.findById(id)
+                .orElse(null);
         updateEducacion.setTitulo(educacion.getTitulo());
         updateEducacion.setEscuela(educacion.getEscuela());
         updateEducacion.setDescripcion(educacion.getEscuela());

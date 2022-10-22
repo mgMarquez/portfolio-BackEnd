@@ -21,7 +21,7 @@ public class EducacionController {
     }
 
     @GetMapping("/{id}")
-    public Educacion getEducacionById(@PathVariable Long id) {
+    public EducacionDTO getEducacionById(@PathVariable Long id) {
         return service.findEducacionById(id);
     }
 
