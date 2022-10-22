@@ -1,8 +1,6 @@
 package com.yoprogramo.portfoliobackend.controller;
 
 import com.yoprogramo.portfoliobackend.dto.PersonaDTO;
-import com.yoprogramo.portfoliobackend.model.Persona;
-import com.yoprogramo.portfoliobackend.model.Usuario;
 import com.yoprogramo.portfoliobackend.service.IPersonaService;
 import com.yoprogramo.portfoliobackend.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +32,8 @@ public class PersonaController {
     }
 
     @PutMapping("/{id}")
-    public void modifyPersona(@PathVariable Long id, @RequestBody Persona persona) {
-        service.updatePersona(id, persona);
+    public PersonaDTO modifyPersona(@PathVariable Long id, @RequestBody PersonaDTO personaDTO) {
+        return service.updatePersona(id, personaDTO);
     }
 
     @DeleteMapping("/{id}")

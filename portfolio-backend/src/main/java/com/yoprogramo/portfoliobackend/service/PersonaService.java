@@ -46,23 +46,24 @@ public class PersonaService implements IPersonaService{
     }
 
     @Override
-    public void updatePersona(Long id, Persona persona) {
+    public PersonaDTO updatePersona(Long id, PersonaDTO personaDTO) {
         Persona updatePersona = repo
                 .findById(id)
                 .orElse(null);
-        updatePersona.setNombre(persona.getNombre());
-        updatePersona.setApellido(persona.getApellido());
-        updatePersona.setFechaNac(persona.getFechaNac());
-        updatePersona.setProfesion(persona.getProfesion());
-        updatePersona.setNacionalidad(persona.getNacionalidad());
-        updatePersona.setUbicacion(persona.getUbicacion());
-        updatePersona.setAcercaDe(persona.getAcercaDe());
-        updatePersona.setEmail(persona.getEmail());
-        updatePersona.setTelefono(persona.getTelefono());
-        updatePersona.setFotoUrl(persona.getFotoUrl());
-        updatePersona.setBannerUrl(persona.getBannerUrl());
+        updatePersona.setNombre(personaDTO.getNombre());
+        updatePersona.setApellido(personaDTO.getApellido());
+        updatePersona.setFechaNac(personaDTO.getFechaNac());
+        updatePersona.setProfesion(personaDTO.getProfesion());
+        updatePersona.setNacionalidad(personaDTO.getNacionalidad());
+        updatePersona.setUbicacion(personaDTO.getUbicacion());
+        updatePersona.setAcercaDe(personaDTO.getAcercaDe());
+        updatePersona.setEmail(personaDTO.getEmail());
+        updatePersona.setTelefono(personaDTO.getTelefono());
+        updatePersona.setFotoUrl(personaDTO.getFotoUrl());
+        updatePersona.setBannerUrl(personaDTO.getBannerUrl());
 
-        repo.save(updatePersona);
+        Persona personaActualizada = repo.save(updatePersona);
+        return mapearDTO(personaActualizada);
     }
     private PersonaDTO mapearDTO(Persona persona) {
         return modelMapper.map(persona, PersonaDTO.class);
