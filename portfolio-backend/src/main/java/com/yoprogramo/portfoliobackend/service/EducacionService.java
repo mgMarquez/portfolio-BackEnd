@@ -1,7 +1,9 @@
 package com.yoprogramo.portfoliobackend.service;
 
+import com.yoprogramo.portfoliobackend.dto.EducacionDTO;
 import com.yoprogramo.portfoliobackend.model.Educacion;
 import com.yoprogramo.portfoliobackend.repository.IEduacionRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +13,15 @@ import java.util.List;
 public class EducacionService implements IEducacionService {
     @Autowired
     private IEduacionRepository repo;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
-    public List<Educacion> findAllEducacion() {
-        return repo.findAll();
+    public List<EducacionDTO> findAllEducacion() {
+        List<Educacion> educaciones = repo.findAll();
+        return educaciones.stream()
+                .map(educacion -> mapearDTO(educacion))
+                .toList();
     }
 
     @Override
@@ -45,5 +52,9 @@ public class EducacionService implements IEducacionService {
         updateEducacion.setFin(educacion.getFin());
 
         saveEducacion(updateEducacion);
+    }
+
+    private EducacionDTO mapearDTO(Educacion educacion) {
+        return modelMapper.map(educacion, EducacionDTO.class);
     }
 }

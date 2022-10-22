@@ -2,6 +2,7 @@ package com.yoprogramo.portfoliobackend.controller;
 
 import java.util.List;
 
+import com.yoprogramo.portfoliobackend.dto.EducacionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,13 +10,13 @@ import com.yoprogramo.portfoliobackend.model.Educacion;
 import com.yoprogramo.portfoliobackend.service.IEducacionService;
 
 @RestController
-@RequestMapping("api/v1/educacion")
+@RequestMapping("api/educaciones")
 public class EducacionController {
     @Autowired
     private IEducacionService service;
 
     @GetMapping("/")
-    public List<Educacion> getAllEducacion() {
+    public List<EducacionDTO> getAllEducacion() {
         return service.findAllEducacion();
     }
 
@@ -24,7 +25,7 @@ public class EducacionController {
         return service.findEducacionById(id);
     }
 
-    @PostMapping("/new")
+    @PostMapping("/")
     public void addEducacion(@RequestBody Educacion educacion) {
         service.saveEducacion(educacion);
     }
