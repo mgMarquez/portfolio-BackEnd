@@ -49,17 +49,28 @@ public class EducacionService implements IEducacionService {
     }
 
     @Override
-    public void deleteEducacion(Long id) {
+    public void deleteEducacion(Long id, Long personaId) {
+        Persona persona = personaRepo.findById(personaId).orElse(null);
         Educacion educacion = repo.findById(id)
                 .orElse(null);
+        if(educacion.getPersona().getId() != persona.getId()) {
+            // exception
+        }
         repo.delete(educacion);
     }
 
     @Override
-    public EducacionDTO updateEducación(Long id, EducacionDTO educacionDTO) {
+    public EducacionDTO updateEducación(Long id, EducacionDTO educacionDTO, Long personaId) {
+
         Educacion educacion = repo.findById(id)
                 .orElse(null);
-        educacion.setTitulo(educacionDTO.getTitulo());
+        Persona persona = personaRepo.findById(personaId).orElse(null);
+
+        if(educacion.getPersona().getId() != persona.getId()) {
+            // exception
+        }
+
+            educacion.setTitulo(educacionDTO.getTitulo());
         educacion.setEscuela(educacionDTO.getEscuela());
         educacion.setDescripcion(educacionDTO.getDescripcion());
         educacion.setImgUrl(educacionDTO.getImgUrl());

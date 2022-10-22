@@ -30,12 +30,12 @@ public class EducacionController {
     }
 
     @PutMapping("/personas/{id_persona}/educaciones/{id}")
-    public EducacionDTO modifyEducacion(@PathVariable Long id, @RequestBody EducacionDTO educacionDTO) {
-        return service.updateEducación(id, educacionDTO);
+    public EducacionDTO modifyEducacion(@PathVariable Long id, @RequestBody EducacionDTO educacionDTO, @PathVariable Long id_persona) {
+        return service.updateEducación(id, educacionDTO, id_persona);
     }
 
     @DeleteMapping("/personas/{id_persona}/educaciones/{id}")
-    public void deleteEducacion(@PathVariable Long id) {
-        service.deleteEducacion(id);
+    public void deleteEducacion(@PathVariable Long id, @PathVariable Long id_persona) {
+        service.deleteEducacion(id, id_persona);
     }
 }

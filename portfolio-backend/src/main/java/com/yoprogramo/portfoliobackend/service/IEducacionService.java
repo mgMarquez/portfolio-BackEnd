@@ -8,6 +8,6 @@ public interface IEducacionService {
     List<EducacionDTO> findAllEducacion();
     EducacionDTO findEducacionById(Long id, Long personaId);
     EducacionDTO saveEducacion(EducacionDTO educacionDTO, Long personaId);
-    EducacionDTO updateEducación(Long id, EducacionDTO educacionDTO);
-    void deleteEducacion(Long id);
+    EducacionDTO updateEducación(Long id, EducacionDTO educacionDTO, Long personaId);
+    void deleteEducacion(Long id, Long personaId);
 }
