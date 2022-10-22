@@ -1,5 +1,6 @@
 package com.yoprogramo.portfoliobackend.controller;
 
+import com.yoprogramo.portfoliobackend.dto.UsuarioDTO;
 import com.yoprogramo.portfoliobackend.model.Usuario;
 import com.yoprogramo.portfoliobackend.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class UsuarioController {
     private IUsuarioService service;
 
     @GetMapping("/")
-    public List<Usuario> getAllUsuarios() {
+    public List<UsuarioDTO> getAllUsuarios() {
         return service.findAllUsuarios();
     }
 
