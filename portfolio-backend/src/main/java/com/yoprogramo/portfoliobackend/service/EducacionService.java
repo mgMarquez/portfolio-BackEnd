@@ -46,17 +46,19 @@ public class EducacionService implements IEducacionService {
     }
 
     @Override
-    public void updateEducación(Long id, Educacion educacion) {
-        Educacion updateEducacion = repo.findById(id)
+    public EducacionDTO updateEducación(Long id, EducacionDTO educacionDTO) {
+        Educacion educacion = repo.findById(id)
                 .orElse(null);
-        updateEducacion.setTitulo(educacion.getTitulo());
-        updateEducacion.setEscuela(educacion.getEscuela());
-        updateEducacion.setDescripcion(educacion.getEscuela());
-        updateEducacion.setImgUrl(educacion.getImgUrl());
-        updateEducacion.setInicio(educacion.getInicio());
-        updateEducacion.setFin(educacion.getFin());
+        educacion.setTitulo(educacionDTO.getTitulo());
+        educacion.setEscuela(educacionDTO.getEscuela());
+        educacion.setDescripcion(educacionDTO.getDescripcion());
+        educacion.setImgUrl(educacionDTO.getImgUrl());
+        educacion.setWebUrl(educacionDTO.getWebUrl());
+        educacion.setInicio(educacionDTO.getInicio());
+        educacion.setFin(educacionDTO.getFin());
 
-        //saveEducacion(updateEducacion);
+        Educacion educacionActualizado = repo.save(educacion);
+        return mapearDTO(educacionActualizado);
     }
 
     private EducacionDTO mapearDTO(Educacion educacion) {

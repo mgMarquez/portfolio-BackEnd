@@ -6,7 +6,6 @@ import com.yoprogramo.portfoliobackend.dto.EducacionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.yoprogramo.portfoliobackend.model.Educacion;
 import com.yoprogramo.portfoliobackend.service.IEducacionService;
 
 @RestController
@@ -31,8 +30,8 @@ public class EducacionController {
     }
 
     @PutMapping("/{id}")
-    public void modifyEducacion(@PathVariable Long id, @RequestBody Educacion educacion) {
-        service.updateEducación(id, educacion);
+    public EducacionDTO modifyEducacion(@PathVariable Long id, @RequestBody EducacionDTO educacionDTO) {
+        return service.updateEducación(id, educacionDTO);
     }
 
     @DeleteMapping("/{id}")
