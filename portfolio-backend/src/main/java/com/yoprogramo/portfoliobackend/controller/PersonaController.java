@@ -1,6 +1,6 @@
 package com.yoprogramo.portfoliobackend.controller;
 
-import com.yoprogramo.portfoliobackend.dto.PersonaDto;
+import com.yoprogramo.portfoliobackend.dto.PersonaDTO;
 import com.yoprogramo.portfoliobackend.model.Persona;
 import com.yoprogramo.portfoliobackend.model.Usuario;
 import com.yoprogramo.portfoliobackend.service.IPersonaService;
@@ -29,7 +29,7 @@ public class PersonaController {
     }
 
     @PostMapping("/new")
-    public void addPersona(@RequestBody PersonaDto personaDto) {
+    public void addPersona(@RequestBody PersonaDTO personaDto) {
         Usuario usuario = serviceUsuario.findUsuarioById(personaDto.getUsuario_id());
         Persona nuevaPersona = new Persona();
         //PersonaDto a Persona
@@ -42,8 +42,8 @@ public class PersonaController {
         nuevaPersona.setAcercaDe(personaDto.getAcercaDe());
         nuevaPersona.setTelefono(personaDto.getTelefono());
         nuevaPersona.setEmail(personaDto.getEmail());
-        nuevaPersona.setFoto(personaDto.getFoto());
-        nuevaPersona.setBanner(personaDto.getBanner());
+        nuevaPersona.setFotoUrl(personaDto.getFotoUrl());
+        nuevaPersona.setBannerUrl(personaDto.getBannerUrl());
         nuevaPersona.setUsuario(usuario);
 
         service.savePersona(nuevaPersona);

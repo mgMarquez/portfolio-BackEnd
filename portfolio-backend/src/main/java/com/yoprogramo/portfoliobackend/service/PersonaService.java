@@ -45,8 +45,8 @@ public class PersonaService implements IPersonaService{
         updatePersona.setAcercaDe(persona.getAcercaDe());
         updatePersona.setEmail(persona.getEmail());
         updatePersona.setTelefono(persona.getTelefono());
-        updatePersona.setFoto(persona.getFoto());
-        updatePersona.setBanner(persona.getBanner());
+        updatePersona.setFotoUrl(persona.getFotoUrl());
+        updatePersona.setBannerUrl(persona.getBannerUrl());
 
         repo.save(updatePersona);
     }

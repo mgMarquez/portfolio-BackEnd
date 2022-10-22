@@ -1,19 +1,25 @@
 package com.yoprogramo.portfoliobackend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
+@Table(name = "personas")
 public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private String apellido;
     private LocalDate fechaNac;
     private String profesion;
@@ -22,13 +28,14 @@ public class Persona {
     private String acercaDe;
     private String email;
     private String telefono;
-    private String foto;
-    private String banner;
-    
-    @OneToOne    
+    private String fotoUrl;
+    private String bannerUrl;
+
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
     private Usuario usuario;
-    // @OneToMany(mappedBy = "persona")
-    // private List<Educacion> educaciones;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Educacion> educaciones = new ArrayList<>();
     // @OneToMany(mappedBy = "persona")
     // private List<Experiencia> experiencias;
     // @OneToMany(mappedBy = "persona")
