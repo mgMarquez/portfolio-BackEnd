@@ -32,8 +32,10 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public void saveUsuario(Usuario usuario) {
-        repo.save(usuario);
+    public UsuarioDTO saveUsuario(UsuarioDTO usuarioDTO) {
+        Usuario usuario = mapearEntidad(usuarioDTO);
+        Usuario nuevoUsuario = repo.save(usuario);
+        return mapearDTO(nuevoUsuario);
     }
 
     @Override
@@ -50,5 +52,9 @@ public class UsuarioService implements IUsuarioService{
 
     private UsuarioDTO mapearDTO(Usuario usuario) {
         return modelMapper.map(usuario, UsuarioDTO.class);
+    }
+
+    private Usuario mapearEntidad(UsuarioDTO usuarioDTO) {
+        return modelMapper.map(usuarioDTO, Usuario.class);
     }
 }

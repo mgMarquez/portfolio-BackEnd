@@ -8,7 +8,7 @@ import java.util.List;
 public interface IUsuarioService {
     List<UsuarioDTO> findAllUsuarios();
     UsuarioDTO findUsuarioById(Long id);
-    void saveUsuario(Usuario usuario);
+    UsuarioDTO saveUsuario(UsuarioDTO usuarioDTO);
     void deleteUsuario(Long id);
     void updateUsuario(Long id, Usuario usuario);
 }

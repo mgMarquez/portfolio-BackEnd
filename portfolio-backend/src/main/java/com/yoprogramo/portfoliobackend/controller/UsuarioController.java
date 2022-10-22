@@ -25,8 +25,8 @@ public class UsuarioController {
     }
 
     @PostMapping("/new")
-    public void addUsuario(@RequestBody Usuario usuario) {
-        service.saveUsuario(usuario);
+    public UsuarioDTO addUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        return service.saveUsuario(usuarioDTO);
     }
 
     @PutMapping("/{id}")
