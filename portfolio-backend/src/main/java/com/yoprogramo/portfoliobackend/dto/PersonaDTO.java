@@ -21,6 +21,4 @@ public class PersonaDTO {
     private String telefono;
     private String fotoUrl;
     private String bannerUrl;
-    private List<EducacionDTO> educaciones = new ArrayList<>();
-    private List<ExperienciaDTO> experiencias = new ArrayList<>();
 }
