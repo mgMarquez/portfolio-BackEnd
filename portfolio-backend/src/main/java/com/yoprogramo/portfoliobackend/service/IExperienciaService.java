@@ -3,12 +3,11 @@ package com.yoprogramo.portfoliobackend.service;
 import java.util.List;
 
 import com.yoprogramo.portfoliobackend.dto.ExperienciaDTO;
-import com.yoprogramo.portfoliobackend.model.Experiencia;
 
 public interface IExperienciaService {
-    List<ExperienciaDTO> findAllExperiencias();
-    Experiencia findExperienciaById(Long id);
-    void saveExperiencia(Experiencia experiencia);
-    void deleteExperiencia(Long id);
-    void updateExperiencia(Long id, Experiencia experiencia);
+    List<ExperienciaDTO> findAllExperiencias(Long personaId);
+    ExperienciaDTO findExperienciaById(Long id);
+    ExperienciaDTO saveExperiencia(ExperienciaDTO experienciaDTO, Long personaId);
+    ExperienciaDTO updateExperiencia(Long id, ExperienciaDTO experienciaDTO, Long personaId);
+    void deleteExperiencia(Long id, Long personaId);
 }

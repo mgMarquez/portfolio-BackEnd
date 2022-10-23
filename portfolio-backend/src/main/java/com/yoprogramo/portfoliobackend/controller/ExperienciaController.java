@@ -4,40 +4,38 @@ import com.yoprogramo.portfoliobackend.dto.ExperienciaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.yoprogramo.portfoliobackend.model.Experiencia;
 import com.yoprogramo.portfoliobackend.service.IExperienciaService;
 
 import java.util.List;
 
-
 @RestController
-@RequestMapping("api/v1/experiencia")
+@RequestMapping("api")
 public class ExperienciaController {
     @Autowired
     private IExperienciaService service;
 
-    @GetMapping("/")
-    public List<ExperienciaDTO> getAllExperiencias() {
-        return service.findAllExperiencias();
+    @GetMapping("/personas/{id}/experiencias")
+    public List<ExperienciaDTO> getAllExperiencias(@PathVariable Long id) {
+        return service.findAllExperiencias(id);
     }
 
-    @GetMapping("/{id}")
-    public Experiencia getExperienciaById(@PathVariable Long id) {
+    @GetMapping("/personas/{persona_id}/experiencias/{id}")
+    public ExperienciaDTO getExperienciaById(@PathVariable Long id) {
         return service.findExperienciaById(id);
     }
 
-    @PostMapping("/new")
-    public void addExperiencia(@RequestBody Experiencia experiencia) {
-        service.saveExperiencia(experiencia);
+    @PostMapping("/personas/{persona_id}/experiencias")
+    public ExperienciaDTO addExperiencia(@RequestBody ExperienciaDTO experienciaDTO, @PathVariable Long persona_id) {
+        return service.saveExperiencia(experienciaDTO, persona_id);
     }
 
-    @PutMapping("/{id}")
-    public void modifyExperiencia(@PathVariable Long id, @RequestBody Experiencia experiencia) {
-        service.updateExperiencia(id, experiencia);
+    @PutMapping("/personas/{persona_id}/experiencias/{id}")
+    public ExperienciaDTO modifyExperiencia(@PathVariable Long id, @RequestBody ExperienciaDTO experienciaDTO, @PathVariable Long persona_id) {
+        return service.updateExperiencia(id, experienciaDTO, persona_id);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteExperiencia(@PathVariable Long id) {
-        service.deleteExperiencia(id);
+    @DeleteMapping("/personas/{persona_id}/experiencias/{id}")
+    public void deleteExperiencia(@PathVariable Long id, @PathVariable Long persona_id) {
+        service.deleteExperiencia(id, persona_id);
     }
 }

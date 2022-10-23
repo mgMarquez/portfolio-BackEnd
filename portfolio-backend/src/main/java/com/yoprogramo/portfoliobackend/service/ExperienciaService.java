@@ -3,6 +3,8 @@ package com.yoprogramo.portfoliobackend.service;
 import java.util.List;
 
 import com.yoprogramo.portfoliobackend.dto.ExperienciaDTO;
+import com.yoprogramo.portfoliobackend.model.Persona;
+import com.yoprogramo.portfoliobackend.repository.IPersonaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +17,13 @@ public class ExperienciaService implements IExperienciaService{
     @Autowired
     private IExperienciaRepository repo;
     @Autowired
+    private IPersonaRepository personaRepository;
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
-    public List<ExperienciaDTO> findAllExperiencias() {
-        List<Experiencia> experiencias = repo.findAll();
+    public List<ExperienciaDTO> findAllExperiencias(Long personaId) {
+        List<Experiencia> experiencias = repo.findByPersonaId(personaId);
         return experiencias
                 .stream()
                 .map(this::mapearDTO)
@@ -27,36 +31,50 @@ public class ExperienciaService implements IExperienciaService{
     }
 
     @Override
-    public void saveExperiencia(Experiencia experiencia) {
-        repo.save(experiencia);        
+    public ExperienciaDTO saveExperiencia(ExperienciaDTO experienciaDTO, Long personaId) {
+        Experiencia experiencia = mapearEntidad(experienciaDTO);
+        Persona persona = personaRepository.findById(personaId).orElse(null);
+        experiencia.setPersona(persona);
+
+        Experiencia nuevaExperiencia = repo.save(experiencia);
+        return mapearDTO(nuevaExperiencia);
     }
 
     @Override
-    public Experiencia findExperienciaById(Long id) {
-        return repo.findById(id)
+    public ExperienciaDTO findExperienciaById(Long id) {
+        Experiencia experiencia =  repo.findById(id)
                 .orElse(null);
+        return mapearDTO(experiencia);
     }
 
     @Override
-    public void deleteExperiencia(Long id) {
+    public void deleteExperiencia(Long id, Long personaId) {
         repo.deleteById(id);        
     }
 
     @Override
-    public void updateExperiencia(Long id, Experiencia experiencia) {
-        Experiencia updateExperiencia = findExperienciaById(id);
-        updateExperiencia.setPosicion(experiencia.getPosicion());
-        updateExperiencia.setCompania(experiencia.getCompania());
-        updateExperiencia.setDescripcion(experiencia.getDescripcion());
-        updateExperiencia.setImgUrl(experiencia.getImgUrl());
-        updateExperiencia.setWebUrl(experiencia.getWebUrl());
-        updateExperiencia.setInicio(experiencia.getInicio());
-        updateExperiencia.setFin(experiencia.getFin());
+    public ExperienciaDTO updateExperiencia(Long id, ExperienciaDTO experienciaDTO, Long personaId) {
+        Experiencia experiencia = repo.findById(id)
+                .orElse(null);
+        Persona persona = personaRepository.findById(personaId).orElse(null);
 
-        saveExperiencia(updateExperiencia);
+        experiencia.setPosicion(experienciaDTO.getPosicion());
+        experiencia.setCompania(experienciaDTO.getCompania());
+        experiencia.setDescripcion(experienciaDTO.getDescripcion());
+        experiencia.setImgUrl(experienciaDTO.getImgUrl());
+        experiencia.setWebUrl(experienciaDTO.getWebUrl());
+        experiencia.setInicio(experienciaDTO.getInicio());
+        experiencia.setFin(experienciaDTO.getFin());
+
+        Experiencia experienciaActualizada = repo.save(experiencia);
+        return mapearDTO(experienciaActualizada);
     }
 
     private ExperienciaDTO mapearDTO(Experiencia experiencia) {
         return modelMapper.map(experiencia, ExperienciaDTO.class);
+    }
+
+    private Experiencia mapearEntidad(ExperienciaDTO experienciaDTO) {
+        return modelMapper.map(experienciaDTO, Experiencia.class);
     }
 }
