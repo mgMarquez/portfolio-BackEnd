@@ -41,9 +41,11 @@ public class ExperienciaService implements IExperienciaService{
     }
 
     @Override
-    public ExperienciaDTO findExperienciaById(Long id) {
+    public ExperienciaDTO findExperienciaById(Long id, Long personaId) {
         Experiencia experiencia =  repo.findById(id)
                 .orElse(null);
+        Persona persona = personaRepository.findById(personaId).orElse(null);
+
         return mapearDTO(experiencia);
     }
 
