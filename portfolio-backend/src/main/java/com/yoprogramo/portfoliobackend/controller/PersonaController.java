@@ -2,7 +2,6 @@ package com.yoprogramo.portfoliobackend.controller;
 
 import com.yoprogramo.portfoliobackend.dto.PersonaDTO;
 import com.yoprogramo.portfoliobackend.service.IPersonaService;
-import com.yoprogramo.portfoliobackend.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

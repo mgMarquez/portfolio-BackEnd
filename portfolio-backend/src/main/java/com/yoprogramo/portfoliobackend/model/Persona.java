@@ -40,6 +40,7 @@ public class Persona {
     @JsonManagedReference
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Proyecto> proyectos = new ArrayList<>();
-    // @OneToMany(mappedBy = "persona")
-    // private List<Tecnologia> tecnologias;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Tecnologia> tecnologias;
 }

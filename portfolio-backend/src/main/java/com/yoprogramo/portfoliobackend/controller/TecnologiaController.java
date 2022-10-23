@@ -1,6 +1,6 @@
 package com.yoprogramo.portfoliobackend.controller;
 
-import com.yoprogramo.portfoliobackend.model.Tecnologia;
+import com.yoprogramo.portfoliobackend.dto.TecnologiaDTO;
 import com.yoprogramo.portfoliobackend.service.ITecnologiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,33 +8,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/tecnologia")
+@RequestMapping("api")
 public class TecnologiaController {
     @Autowired
     private ITecnologiaService service;
 
-    @GetMapping("/")
-    public List<Tecnologia> getAllTecnologias() {
-        return service.findAllTecnologias();
+    @GetMapping("/personas/{persona_id}/tecnologias")
+    public List<TecnologiaDTO> getAllTecnologias(@PathVariable Long persona_id) {
+        return service.findAllTecnologias(persona_id);
     }
 
-    @GetMapping("/{id}")
-    public Tecnologia getTecnologiaById(@PathVariable Long id) {
-        return service.findTecnologiaById(id);
+    @GetMapping("/personas/{persona_id}/tecnologias/{id}")
+    public TecnologiaDTO getTecnologiaById(@PathVariable Long id,
+                                           @PathVariable Long persona_id) {
+        return service.findTecnologiaById(id, persona_id);
     }
 
-    @PostMapping("/new")
-    public void addTecnologia(@RequestBody Tecnologia tecnologia) {
-        service.saveTecnologia(tecnologia);
+    @PostMapping("/personas/{persona_id}/tecnologias")
+    public TecnologiaDTO addTecnologia(@RequestBody TecnologiaDTO tecnologiaDTO,
+                                       @PathVariable Long persona_id) {
+        return service.saveTecnologia(tecnologiaDTO, persona_id);
     }
 
-    @PutMapping("/{id}")
-    public void modifyTecnologia(@PathVariable Long id, @RequestBody Tecnologia tecnologia) {
-        service.updateTecnologia(id, tecnologia);
+    @PutMapping("/personas/{persona_id}/tecnologias/{id}")
+    public TecnologiaDTO modifyTecnologia(@PathVariable Long id,
+                                          @RequestBody TecnologiaDTO tecnologiaDTO,
+                                          @PathVariable Long persona_id) {
+        return service.updateTecnologia(id, tecnologiaDTO, persona_id);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteTecnologia(@PathVariable Long id) {
-        service.deleteTecnologia(id);
+    @DeleteMapping("/personas/{persona_id}/tecnologias/{id}")
+    public void deleteTecnologia(@PathVariable Long id,
+                                 @PathVariable Long persona_id) {
+        service.deleteTecnologia(id, persona_id);
     }
 }
