@@ -15,8 +15,8 @@ public class EducacionController {
     private IEducacionService service;
 
     @GetMapping("/personas/{id_persona}/educaciones")
-    public List<EducacionDTO> getAllEducacion() {
-        return service.findAllEducacion();
+    public List<EducacionDTO> getAllEducacion(@PathVariable Long id_persona) {
+        return service.findAllEducacion(id_persona);
     }
 
     @GetMapping("/personas/{id_persona}/educaciones/{id}")

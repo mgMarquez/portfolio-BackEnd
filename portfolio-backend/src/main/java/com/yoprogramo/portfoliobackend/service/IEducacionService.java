@@ -5,7 +5,7 @@ import com.yoprogramo.portfoliobackend.dto.EducacionDTO;
 import java.util.List;
 
 public interface IEducacionService {
-    List<EducacionDTO> findAllEducacion();
+    List<EducacionDTO> findAllEducacion(Long personaId);
     EducacionDTO findEducacionById(Long id, Long personaId);
     EducacionDTO saveEducacion(EducacionDTO educacionDTO, Long personaId);
     EducacionDTO updateEducación(Long id, EducacionDTO educacionDTO, Long personaId);

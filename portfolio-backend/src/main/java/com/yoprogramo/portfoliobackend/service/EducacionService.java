@@ -21,8 +21,8 @@ public class EducacionService implements IEducacionService {
     private ModelMapper modelMapper;
 
     @Override
-    public List<EducacionDTO> findAllEducacion() {
-        List<Educacion> educaciones = repo.findAll();
+    public List<EducacionDTO> findAllEducacion(Long personaId) {
+        List<Educacion> educaciones = repo.findByPersonaId(personaId);
         return educaciones.stream()
                 .map(educacion -> mapearDTO(educacion))
                 .toList();
