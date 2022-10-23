@@ -2,6 +2,10 @@ package com.yoprogramo.portfoliobackend.service;
 
 import java.util.List;
 
+import com.yoprogramo.portfoliobackend.dto.ProyectoDTO;
+import com.yoprogramo.portfoliobackend.model.Persona;
+import com.yoprogramo.portfoliobackend.repository.IPersonaRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,37 +16,67 @@ import com.yoprogramo.portfoliobackend.repository.IProyectoRepository;
 public class ProyectoService implements IProyectoService{
     @Autowired
     private IProyectoRepository repo;
-    
+    @Autowired
+    private IPersonaRepository personaRepository;
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
-    public List<Proyecto> findAllProyectos() {
-        return repo.findAll();
+    public List<ProyectoDTO> findAllProyectos(Long personaId) {
+        List<Proyecto> proyectos = repo.findByPersonaId(personaId);
+
+        return proyectos
+                .stream()
+                .map(this::mapearDTO)
+                .toList();
     }
 
     @Override
-    public Proyecto findProyectoById(Long id) {
-        return repo.findById(id)
-                .orElse(null);
+    public ProyectoDTO findProyectoById(Long id, Long personaId) {
+        Proyecto proyecto = repo.findById(id).orElse(null);
+        Persona persona = personaRepository.findById(personaId).orElse(null);
+
+        return mapearDTO(proyecto);
     }
 
     @Override
-    public void saveProyecto(Proyecto proyecto) {
-        repo.save(proyecto);        
+    public ProyectoDTO saveProyecto(ProyectoDTO proyectoDTO, Long personaId) {
+        Proyecto proyecto = mapearEntidad(proyectoDTO);
+        Persona persona = personaRepository.findById(personaId).orElse(null);
+
+        proyecto.setPersona(persona);
+
+        Proyecto nuevoProyecto = repo.save(proyecto);
+        return mapearDTO(nuevoProyecto);
     }
 
     @Override
-    public void deleteProyecto(Long id) {
-        repo.deleteById(id);        
+    public ProyectoDTO updateProyecto(Long id, ProyectoDTO proyectoDTO, Long personaId) {
+        Proyecto proyecto = repo.findById(id).orElse(null);
+        Persona persona = personaRepository.findById(personaId).orElse(null);
+
+        proyecto.setTitulo(proyectoDTO.getTitulo());
+        proyecto.setDescripcion(proyectoDTO.getDescripcion());
+        proyecto.setImgUrl(proyectoDTO.getImgUrl());
+        proyecto.setWebUrl(proyectoDTO.getWebUrl());
+
+        Proyecto proyectoActualizado = repo.save(proyecto);
+
+        return mapearDTO(proyectoActualizado);
     }
 
     @Override
-    public void updateProyecto(Long id, Proyecto proyecto) {
-        Proyecto updateProyecto = findProyectoById(id);
-        updateProyecto.setTitulo(proyecto.getTitulo());        
-        updateProyecto.setDescripcion(proyecto.getDescripcion());
-        updateProyecto.setImg(proyecto.getImg());
-        updateProyecto.setUrl(proyecto.getUrl());
+    public void deleteProyecto(Long id, Long personaId) {
+        Persona persona = personaRepository.findById(personaId).orElse(null);
 
-        saveProyecto(updateProyecto);
+        repo.deleteById(id);
     }
-    
+
+    private ProyectoDTO mapearDTO(Proyecto proyecto) {
+        return modelMapper.map(proyecto, ProyectoDTO.class);
+    }
+
+    private Proyecto mapearEntidad(ProyectoDTO proyectoDTO) {
+        return modelMapper.map(proyectoDTO, Proyecto.class);
+    }
 }
