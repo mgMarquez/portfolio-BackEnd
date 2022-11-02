@@ -2,7 +2,7 @@ package com.yoprogramo.portfoliobackend.security.entity;
 
 import com.yoprogramo.portfoliobackend.model.Usuario;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UsuarioPrincipal implements UserDetails {
     private String nombreUsuario;
+    @Getter
     private String email;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
