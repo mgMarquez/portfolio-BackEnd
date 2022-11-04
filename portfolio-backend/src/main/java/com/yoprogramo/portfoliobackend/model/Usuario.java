@@ -23,7 +23,7 @@ public class Usuario {
     @Column(nullable = false)
     private String contrasenia;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)//, optional = false)
     private Persona persona;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_rol",

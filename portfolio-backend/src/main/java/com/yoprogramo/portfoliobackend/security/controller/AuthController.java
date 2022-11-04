@@ -7,8 +7,8 @@ import com.yoprogramo.portfoliobackend.security.dto.LoginUsuario;
 import com.yoprogramo.portfoliobackend.security.entity.Rol;
 import com.yoprogramo.portfoliobackend.security.enums.RolTipo;
 import com.yoprogramo.portfoliobackend.security.jwt.JwtProvider;
-import com.yoprogramo.portfoliobackend.security.service.RolService;
-import com.yoprogramo.portfoliobackend.security.service.UsuarioService;
+import com.yoprogramo.portfoliobackend.security.service.IRolService;
+import com.yoprogramo.portfoliobackend.security.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,9 +34,9 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private UsuarioService usuarioService;
+    private IUsuarioService usuarioService;
     @Autowired
-    private RolService rolService;
+    private IRolService rolService;
     @Autowired
     private JwtProvider jwtProvider;
 
