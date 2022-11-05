@@ -1,27 +1,31 @@
-package com.yoprogramo.portfoliobackend.service;
+package com.yoprogramo.portfoliobackend.security.service;
 
 import com.yoprogramo.portfoliobackend.dto.UsuarioDTO;
 import com.yoprogramo.portfoliobackend.model.Persona;
 import com.yoprogramo.portfoliobackend.model.Usuario;
 import com.yoprogramo.portfoliobackend.repository.IPersonaRepository;
-import com.yoprogramo.portfoliobackend.repository.IUsuarioRepository;
+import com.yoprogramo.portfoliobackend.security.repository.IUsuarioRepository;
+import com.yoprogramo.portfoliobackend.security.service.IUsuarioService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UsuarioService implements IUsuarioService{
+@Transactional
+public class UsuarioService implements IUsuarioService {
     @Autowired
-    private IUsuarioRepository repo;
+    private IUsuarioRepository usuarioRepository;
     @Autowired
     private IPersonaRepository personaRepo;
     @Autowired
     private ModelMapper modelMapper;
     @Override
     public List<UsuarioDTO> findAllUsuarios() {
-        List<Usuario> usuarios = repo.findAll();
+        List<Usuario> usuarios = usuarioRepository.findAll();
         return usuarios
                 .stream()
                 .map(this::mapearDTO)
@@ -30,7 +34,7 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public UsuarioDTO findUsuarioById(Long id) {
-        Usuario usuario = repo.findById(id)
+        Usuario usuario = usuarioRepository.findById(id)
                 .orElse(null);
         return mapearDTO(usuario);
     }
@@ -40,18 +44,18 @@ public class UsuarioService implements IUsuarioService{
         Persona persona = personaRepo.findById(personaId).orElse(null);
         Usuario usuario = mapearEntidad(usuarioDTO);
         usuario.setPersona(persona);
-        Usuario nuevoUsuario = repo.save(usuario);
+        Usuario nuevoUsuario = usuarioRepository.save(usuario);
         return mapearDTO(nuevoUsuario);
     }
 
     @Override
     public void deleteUsuario(Long id) {
-        repo.deleteById(id);
+        usuarioRepository.deleteById(id);
     }
 
     @Override
     public UsuarioDTO updateUsuario(Long id, UsuarioDTO usuarioDTO, Long personaId) {
-        Usuario usuario = repo.findById(id).orElse(null);
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
         Persona persona = personaRepo.findById(personaId).orElse(null);
 
         usuario.setNombre(usuarioDTO.getNombre());
@@ -59,8 +63,25 @@ public class UsuarioService implements IUsuarioService{
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setPersona(persona);
 
-        Usuario usuarioActualizado = repo.save(usuario);
+        Usuario usuarioActualizado = usuarioRepository.save(usuario);
         return mapearDTO(usuarioActualizado);
+    }
+
+    //
+    public Optional<Usuario> getByNombreUsuario(String nombreUsuario) {
+        return usuarioRepository.findByNombre(nombreUsuario);
+    }
+
+    public boolean existsByNombreUsuario(String nombreUsuario) {
+        return usuarioRepository.existsByNombre(nombreUsuario);
+    }
+
+    public boolean existsByEmail(String email) {
+        return usuarioRepository.existsByEmail(email);
+    }
+
+    public void save(Usuario usuario) {
+        usuarioRepository.save(usuario);
     }
 
     private UsuarioDTO mapearDTO(Usuario usuario) {

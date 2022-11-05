@@ -3,6 +3,7 @@ package com.yoprogramo.portfoliobackend.controller;
 import com.yoprogramo.portfoliobackend.dto.PersonaDTO;
 import com.yoprogramo.portfoliobackend.service.IPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,16 +24,19 @@ public class PersonaController {
         return service.findPersonaById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping()
     public PersonaDTO addPersona(@RequestBody PersonaDTO personaDTO) {
         return service.savePersona(personaDTO);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public PersonaDTO modifyPersona(@PathVariable Long id, @RequestBody PersonaDTO personaDTO) {
         return service.updatePersona(id, personaDTO);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public void deletePersona(@PathVariable Long id) {
         service.deletePersona(id);
