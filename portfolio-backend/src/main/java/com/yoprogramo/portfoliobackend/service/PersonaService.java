@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonaService implements IPersonaService{
@@ -22,7 +23,7 @@ public class PersonaService implements IPersonaService{
         return personas
                 .stream()
                 .map(this::mapearDTO)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override

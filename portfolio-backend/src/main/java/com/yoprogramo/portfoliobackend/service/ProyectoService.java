@@ -1,6 +1,7 @@
 package com.yoprogramo.portfoliobackend.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.yoprogramo.portfoliobackend.dto.ProyectoDTO;
 import com.yoprogramo.portfoliobackend.model.Persona;
@@ -28,7 +29,7 @@ public class ProyectoService implements IProyectoService{
         return proyectos
                 .stream()
                 .map(this::mapearDTO)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override

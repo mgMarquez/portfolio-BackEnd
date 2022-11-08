@@ -1,6 +1,7 @@
 package com.yoprogramo.portfoliobackend.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.yoprogramo.portfoliobackend.dto.ExperienciaDTO;
 import com.yoprogramo.portfoliobackend.model.Persona;
@@ -27,7 +28,7 @@ public class ExperienciaService implements IExperienciaService{
         return experiencias
                 .stream()
                 .map(this::mapearDTO)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override

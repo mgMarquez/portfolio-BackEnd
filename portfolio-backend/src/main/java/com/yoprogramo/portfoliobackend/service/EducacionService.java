@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EducacionService implements IEducacionService {
@@ -25,7 +26,7 @@ public class EducacionService implements IEducacionService {
         List<Educacion> educaciones = repo.findByPersonaId(personaId);
         return educaciones.stream()
                 .map(educacion -> mapearDTO(educacion))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
