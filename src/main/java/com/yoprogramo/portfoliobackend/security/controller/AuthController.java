@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -39,6 +40,15 @@ public class AuthController {
     private IRolService rolService;
     @Autowired
     private JwtProvider jwtProvider;
+
+    @GetMapping("/roles")
+    public List<Rol> mostrarRoles() {
+        return rolService.mostrarRoles();
+    }
+    @PostMapping("/roles/nuevo")
+    public void nuevoRol(@RequestBody Rol rol) {
+        rolService.save(rol);
+    }
 
     @PostMapping("/nuevo")
     public ResponseEntity<?> nuevoUsuario(@Valid @RequestBody UsuarioDTO nuevoUsuario, BindingResult bindingResult) {
