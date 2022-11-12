@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/auth")
 @CrossOrigin(origins = "*")
+@RequestMapping("/auth")
 public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
