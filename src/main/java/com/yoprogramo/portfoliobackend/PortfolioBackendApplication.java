@@ -25,7 +25,7 @@ public class PortfolioBackendApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("https://hosting-angular-c1a9a.firebaseapp.com");
+				registry.addMapping("/**").allowedOrigins("https://hosting-angular-c1a9a.firebaseapp.com", "http://localhost:4200/");
 			}
 		};
 	}
