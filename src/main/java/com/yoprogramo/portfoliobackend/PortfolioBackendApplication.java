@@ -27,7 +27,7 @@ public class PortfolioBackendApplication {
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
 						.allowedOrigins("https://hosting-angular-c1a9a.firebaseapp.com", "http://localhost:4200/")
-						.allowedMethods("GET", "PUT", "POST", "PATCH", "DELETE");
+						.allowedMethods("PUT", "DELETE");
 			}
 		};
 	}
