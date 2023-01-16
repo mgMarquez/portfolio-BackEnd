@@ -24,19 +24,19 @@ public class PersonaController {
         return service.findPersonaById(id);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping()
     public PersonaDTO addPersona(@RequestBody PersonaDTO personaDTO) {
         return service.savePersona(personaDTO);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public PersonaDTO modifyPersona(@PathVariable Long id, @RequestBody PersonaDTO personaDTO) {
         return service.updatePersona(id, personaDTO);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public void deletePersona(@PathVariable Long id) {
         service.deletePersona(id);
