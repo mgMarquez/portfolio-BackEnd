@@ -52,11 +52,11 @@ public class AuthController {
     @PostMapping("/nuevo")
     public ResponseEntity<?> nuevoUsuario(@Valid @RequestBody UsuarioDTO nuevoUsuario, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return new ResponseEntity("Campos mal puestos o email invalido", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Campos mal puestos o email invalido", HttpStatus.BAD_REQUEST);
         if (usuarioService.existsByNombreUsuario(nuevoUsuario.getNombre()))
-            return new ResponseEntity("Ese nombre de usuario ya existe", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Ese nombre de usuario ya existe", HttpStatus.BAD_REQUEST);
         if (usuarioService.existsByEmail(nuevoUsuario.getEmail()))
-            return new ResponseEntity("Ese email ya existe", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Ese email ya existe", HttpStatus.BAD_REQUEST);
 
         Usuario usuario = new Usuario();
         usuario.setNombre(nuevoUsuario.getNombre());
@@ -78,7 +78,9 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<JwtDTO> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return new ResponseEntity("Campos mal puestos", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        if (bindingResult.hasErrors())
+//            return new ResponseEntity("Campos mal puestos", HttpStatus.BAD_REQUEST);
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginUsuario.getNombreUsuario(),
                 loginUsuario.getPassword()));
@@ -88,6 +90,6 @@ public class AuthController {
 
         JwtDTO jwtDTO = new JwtDTO(jwt, userDetails.getUsername(), userDetails.getAuthorities());
 
-        return new ResponseEntity(jwtDTO, HttpStatus.OK);
+        return new ResponseEntity<>(jwtDTO, HttpStatus.OK);
     }
 }

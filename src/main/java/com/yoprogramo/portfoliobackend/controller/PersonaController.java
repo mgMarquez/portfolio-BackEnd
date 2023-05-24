@@ -3,7 +3,6 @@ package com.yoprogramo.portfoliobackend.controller;
 import com.yoprogramo.portfoliobackend.dto.PersonaDTO;
 import com.yoprogramo.portfoliobackend.service.IPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

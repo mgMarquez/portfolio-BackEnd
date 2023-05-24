@@ -25,7 +25,7 @@ public class EducacionService implements IEducacionService {
     public List<EducacionDTO> findAllEducacion(Long personaId) {
         List<Educacion> educaciones = repo.findByPersonaId(personaId);
         return educaciones.stream()
-                .map(educacion -> mapearDTO(educacion))
+                .map(this::mapearDTO)
                 .collect(Collectors.toList());
     }
 
@@ -43,7 +43,7 @@ public class EducacionService implements IEducacionService {
         Persona persona = personaRepo.findById(personaId).orElse(null);
         Educacion educacion = repo.findById(id)
                 .orElse(null);
-        if(educacion.getPersona().getId() != persona.getId()) {
+        if(!educacion.getPersona().getId().equals(persona.getId())) {
             // exception
         }
         return mapearDTO(educacion);
@@ -61,7 +61,7 @@ public class EducacionService implements IEducacionService {
     }
 
     @Override
-    public EducacionDTO updateEducación(Long id, EducacionDTO educacionDTO, Long personaId) {
+    public EducacionDTO updateEducacion(Long id, EducacionDTO educacionDTO, Long personaId) {
 
         Educacion educacion = repo.findById(id)
                 .orElse(null);

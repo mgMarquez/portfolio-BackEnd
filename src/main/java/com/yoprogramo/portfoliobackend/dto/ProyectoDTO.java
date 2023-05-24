@@ -3,8 +3,6 @@ package com.yoprogramo.portfoliobackend.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-
 @Getter @Setter
 public class ProyectoDTO {
     private Long id;

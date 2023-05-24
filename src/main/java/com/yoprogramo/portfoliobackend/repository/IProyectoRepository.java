@@ -1,6 +1,5 @@
 package com.yoprogramo.portfoliobackend.repository;
 
-import com.yoprogramo.portfoliobackend.model.Educacion;
 import com.yoprogramo.portfoliobackend.model.Proyecto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
