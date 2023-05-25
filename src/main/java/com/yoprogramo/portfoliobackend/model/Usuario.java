@@ -29,5 +29,6 @@ public class Usuario {
     @JoinTable(name = "usuario_rol",
                 joinColumns = @JoinColumn(name = "usuario_id"),
                 inverseJoinColumns = @JoinColumn(name = "rol_id"))
+    @Enumerated(EnumType.STRING)
     private Set<Rol> roles = new HashSet<>();
 }
